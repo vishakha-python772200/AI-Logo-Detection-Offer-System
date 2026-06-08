@@ -71,7 +71,7 @@ for brand in BRANDS:
 
     random.shuffle(all_images)
 
-    split      = int(len(all_images) * 0.8)
+    split      = int(len(all_images) * 0.8) # 80 percent trainng aste 20 % validation sathi used hote itha 
     train_imgs = all_images[:split]
     val_imgs   = all_images[split:]
 
@@ -95,28 +95,25 @@ print("Split Done!\n")
 print("=" * 50)
 print("STEP 3 : YOLOv8 Training Suru!")
 print("=" * 50)
-print("30-45 minutes lagtil...")
-print("Laptop band karu nakos!\n")
-
-model = YOLO("yolov8n-cls.pt")
+model = YOLO("yolov8n-cls.pt") # this is our yolo model
 
 model.train(
     data    = DATASET_PATH,
-    epochs  = 100,
-    imgsz   = 224,
-    batch   = 16,
+    epochs  = 100,# mahnje 100 traing hoil ata 
+    imgsz   = 224, # image size of 
+    batch   = 16, # mahnje  at a time 16 images baghto
     device  = "cpu",
-    workers = 2,
-    patience= 20,
-    lr0     = 0.001,
-    save    = True,
+    workers = 2, # mahnje ak training kam karel dusra fast run hoil 
+    patience= 20, # kiti mistake sahan karel
+    lr0     = 0.001, # ai chi power 0.001 used jast ghetal fast chalel 
+    save    = True, # after training model saved 
     plots   = True,
-    verbose = True,
+    verbose = True,  #terminal madhe all training information print hoil 
     project = RUNS_PATH,
     name    = "classify/train"
 )
 
-print("\nTraining Zali!")
+print("\nTraining completed!")
 print(f"Model : {MODEL_PATH}\n")
 
 # ==========================================
@@ -209,7 +206,7 @@ for cls in BRANDS:
         # ==========================================
         # UI - TOP BANNER - Brand + Confidence
         # ==========================================
-        cv2.rectangle(frame, (0, 0), (800, 65), banner_color, -1)
+        cv2.rectangle(frame, (0, 0), (800, 65), banner_color, -1) # banner created karto 
         cv2.putText(frame,
                     f"Detected: {pred_name.upper()}  |  Confidence: {confidence:.1f}%",
                     (15, 42),
@@ -262,11 +259,12 @@ print("=" * 60)
 print("        AI LOGO DETECTION - FINAL REPORT")
 print("=" * 60)
 
-for brand in BRANDS:
+for brand in BRANDS: # brand wise accuracy 
     if brand_total[brand] > 0:
         acc    = (brand_correct[brand] / brand_total[brand]) * 100
         status = "EXCELLENT" if acc >= 90 else "GOOD" if acc >= 75 else "NEEDS MORE DATA"
         print(f"{brand.upper():12} | {brand_correct[brand]:3}/{brand_total[brand]:3} | {acc:6.2f}% | {status}")
+        # ithe to 12 character space reseved karto 
 
 print("=" * 60)
 
@@ -277,8 +275,8 @@ if total > 0:
     if overall >= 90:
         print("STATUS : EXCELLENT - Project Complete!")
     elif overall >= 75:
-        print("STATUS : GOOD - Thoda improve karu!")
+        print("STATUS : GOOD - Thoda  impoved karu ")
     else:
-        print("STATUS : Jast images hav yat!")
+        print("STATUS : Jast images hav yat")
 
 print("=" * 60)
