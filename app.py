@@ -58,8 +58,7 @@ st.markdown("""
 # ==========================================
 # MODEL LOAD
 # ==========================================
-MODEL_PATH = r"E:\VISHAKHA PYTHON ALL IMPORTANT DATA VERY IMPORTANT DATA\Vishakha ml small project\computer_vision\runs\classify\train\weights\best.pt"
-
+MODEL_PATH = "best.pt"
 if not os.path.exists(MODEL_PATH):
     st.error("Model nahi milala! Pahile train.py run kara!")
     st.stop()
