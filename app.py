@@ -56,15 +56,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# MODEL LOAD
+# MODEL PATH - FULL PATH दिला!
 # ==========================================
-MODEL_PATH = "best.pt"
-
+MODEL_PATH = r"best.pt"
 if not os.path.exists(MODEL_PATH):
-    st.error("Model nahi milala! Pahile train.py run kara!")
+    st.error(f"Model nahi milala: {MODEL_PATH}")
     st.stop()
 
 model = YOLO(MODEL_PATH)
+st.sidebar.success("Model Load Zala!")
 
 # ==========================================
 # 10 BRANDS - OFFERS
@@ -99,7 +99,6 @@ st.write("")
 # SIDEBAR
 # ==========================================
 st.sidebar.title("Project Menu")
-st.sidebar.success("AI Logo Classification System")
 st.sidebar.info("""
 Supported Brands:
 - KFC
@@ -153,16 +152,15 @@ if uploaded_file is not None:
             use_container_width=True
         )
 
-    # PIL Image → numpy array → YOLO
-    # tempfile नाही - Cloud वर काम करतो!
+    # PIL → numpy → YOLO
     img_array = np.array(image.convert("RGB"))
 
-    # YOLO Prediction
     results    = model.predict(
                     source  = img_array,
                     imgsz   = 224,
                     verbose = False
                 )
+
     r          = results[0]
     pred_id    = int(r.probs.top1)
     confidence = float(r.probs.top1conf)
@@ -172,7 +170,6 @@ if uploaded_file is not None:
     with col2:
         st.subheader("Detection Result")
 
-        # Result Box
         st.markdown(
             f"""
             <div class="result-box">
@@ -185,13 +182,11 @@ if uploaded_file is not None:
 
         st.write("")
 
-        # Confidence Score
         st.success(f"Confidence Score : {confidence * 100:.2f}%")
         st.progress(int(confidence * 100))
 
         st.write("")
 
-        # Offer Box
         st.markdown(
             f"""
             <div class="offer-box">
