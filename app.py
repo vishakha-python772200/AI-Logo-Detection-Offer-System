@@ -58,7 +58,7 @@ st.markdown("""
 # ==========================================
 # MODEL LOAD
 # ==========================================
-MODEL_PATH = "best.pt"
+MODEL_PATH = r"best.pt"
 
 if not os.path.exists(MODEL_PATH):
     st.error("Model nahi milala! Pahile train.py run kara!")
