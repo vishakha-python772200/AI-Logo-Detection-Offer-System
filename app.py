@@ -64,7 +64,7 @@ if not os.path.exists(MODEL_PATH):
     st.stop()
 
 model = YOLO(MODEL_PATH)
-st.sidebar.success("Model Load Zala!")
+st.sidebar.success("Model Load successfull")
 
 # ==========================================
 # 10 BRANDS - OFFERS
